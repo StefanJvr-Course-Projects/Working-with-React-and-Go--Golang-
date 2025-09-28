@@ -11,6 +11,8 @@ function App(props) {
 
   //refs
   const firstNameRef = useRef();
+  const lastNameRef = useRef(null);
+  const dobRef = useRef(null);
 
   const toggleTrue = () => {
     if (isTrue) {
@@ -47,19 +49,19 @@ function App(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-   if (lastName !== "") {
+    if (lastName !== "") {
       addPerson(firstName, lastName, dob);
-   }
-  }
+    }
+  };
 
   const addPerson = (newFirst, newLast, newDOB) => {
     //create the object
     let newPerson = {
-      id: crowd.length +1,
+      id: crowd.length + 1,
       firstName: newFirst,
       lastName: newLast,
       dob: newDOB,
-    }
+    };
 
     const newList = crowd.concat(newPerson);
 
@@ -70,7 +72,7 @@ function App(props) {
         return 1;
       }
       return 0;
-    })
+    });
 
     setCrowd(sorted);
     setFirstName("");
@@ -78,7 +80,9 @@ function App(props) {
     setDob("");
 
     firstNameRef.current.value = "";
-  }
+    lastNameRef.current.value="";
+    dobRef.current.value="";
+  };
 
   return (
     <Fragment>
@@ -117,6 +121,7 @@ function App(props) {
         <Input
           title="Last Name"
           type="text"
+          ref={lastNameRef}
           name="last-name"
           autoComplete="last-name-new"
           className="form-control"
@@ -126,12 +131,12 @@ function App(props) {
         <Input
           title="Date of Birth"
           type="date"
+          ref={dobRef}
           name="dob"
           autoComplete="dob-new"
           className="form-control"
           onChange={(event) => setDob(event.target.value)}
         ></Input>
-
 
         <input type="submit" value="Submit" className="btn btn-primary"></input>
       </form>
