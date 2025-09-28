@@ -80,8 +80,8 @@ function App(props) {
     setDob("");
 
     firstNameRef.current.value = "";
-    lastNameRef.current.value="";
-    dobRef.current.value="";
+    lastNameRef.current.value = "";
+    dobRef.current.value = "";
   };
 
   return (
