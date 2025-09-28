@@ -22,24 +22,57 @@ function App(props) {
     let people = [
       {
         id: 1,
-        firstName: "John",
-        lastName: "Doe",
+        firstName: "Mary",
+        lastName: "Jones",
         dob: "1997-05-02",
       },
       {
         id: 2,
-        firstName: "Jane",
-        lastName: "Doe",
+        firstName: "Jack",
+        lastName: "Smith",
         dob: "2001-10-11",
       },
     ];
     setCrowd(people);
   }, []); // Effect hook
 
+  // for the last parameter []:
+  // 1) when not there, useEffect runs on every render
+  // 2) when an empty array, runs only on first render
+  // 3) you can pas props or state values, but do not set state in the function
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(firstName, lastName, dob);
+   if (lastName !== "") {
+      addPerson(firstName, lastName, dob);
+   }
+  }
+
+  const addPerson = (newFirst, newLast, newDOB) => {
+    //create the object
+    let newPerson = {
+      id: crowd.length +1,
+      firstName: newFirst,
+      lastName: newLast,
+      dob: newDOB,
+    }
+
+    const newList = crowd.concat(newPerson);
+
+    const sorted = newList.sort((a, b) => {
+      if (a.lastName < b.lastName) {
+        return -1;
+      } else if (a.lastName > b.lastName) {
+        return 1;
+      }
+      return 0;
+    })
+
+    setCrowd(sorted);
+    setFirstName("");
+    setLastName("");
+    setDob("");
   }
 
   return (
