@@ -20,12 +20,10 @@ func main() {
 
 	// connect to the database
 
-
-	app.Domain ="example.com"
+	app.Domain = "example.com"
 
 	log.Println("starting application on port:", port)
 
-	
 	// start a web server
 	err := http.ListenAndServe(fmt.Sprintf(":%d", port), app.routes())
 	if err != nil {
